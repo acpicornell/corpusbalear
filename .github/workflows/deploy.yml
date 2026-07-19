@@ -30,3 +30,6 @@ jobs:
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          # Static-assets-only Workers (no `main` entry-point) need Wrangler v4;
+          # the action's default v3 pin fails with "Missing entry-point".
+          wranglerVersion: "4.112.0"
