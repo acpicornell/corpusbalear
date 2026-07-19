@@ -1,0 +1,30 @@
+name: Accessibility
+
+# Serve the static site and run pa11y against it at WCAG 2.1 AA.
+# Guards the contrast / focus / semantics fixed in the accessibility audit.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  pa11y:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Serve web/
+        run: python3 -m http.server 8080 --directory web &
+      - name: Wait for server
+        run: |
+          for i in $(seq 1 20); do
+            curl -sf http://127.0.0.1:8080/ >/dev/null && exit 0
+            sleep 0.5
+          done
+          echo "server did not start"; exit 1
+      - name: pa11y (WCAG2AA)
+        run: npx --yes pa11y --config .github/pa11y.json --standard WCAG2AA http://127.0.0.1:8080/

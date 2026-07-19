@@ -1,6 +1,8 @@
 # Corpus Balear — portal
 
 [![Validate](https://github.com/acpicornell/corpusbalear/actions/workflows/validate.yml/badge.svg)](https://github.com/acpicornell/corpusbalear/actions/workflows/validate.yml)
+[![Accessibility](https://github.com/acpicornell/corpusbalear/actions/workflows/a11y.yml/badge.svg)](https://github.com/acpicornell/corpusbalear/actions/workflows/a11y.yml)
+[![Links](https://github.com/acpicornell/corpusbalear/actions/workflows/links.yml/badge.svg)](https://github.com/acpicornell/corpusbalear/actions/workflows/links.yml)
 
 Landing hub for the **Corpus Balear**: a family of independent digital editions of
 public-domain historical sources about the Balearic Islands — the great censuses and
@@ -57,12 +59,19 @@ The interface is in Catalan, as a deliberate cultural choice for the material.
     `Permissions-Policy`).
 - `wrangler.jsonc` — Worker config (`name: corpusbalear-portal`, assets from `web/`).
 
-## Validation
+## Continuous integration
 
-`scripts/validate.py` (standard library only) checks HTML sanity, JSON-LD validity,
-internal-anchor resolution, relative-asset existence, and that the project cards and the
-JSON-LD `hasPart` graph list the same URLs. Run it locally with `python3 scripts/validate.py`;
-GitHub Actions (`.github/workflows/validate.yml`) runs it on every push and pull request.
+GitHub Actions run on every push and pull request (`.github/workflows/`):
+
+- **validate** — `scripts/validate.py` (standard library only): HTML sanity, JSON-LD
+  validity, internal-anchor resolution, relative-asset existence, and that the project
+  cards and the JSON-LD `hasPart` graph list the same URLs. Run locally with
+  `python3 scripts/validate.py`.
+- **a11y** — serves the site and runs [pa11y](https://pa11y.org/) at WCAG 2.1 AA.
+- **links** — [lychee](https://lychee.cli.rs/) checks external links stay alive (the
+  `corpusbalear.org` hosts are excluded until deployed).
+- **deploy** — `wrangler deploy` on push to main. Inert until a `CLOUDFLARE_API_TOKEN`
+  repository secret is set (the guard step skips it so the run stays green meanwhile).
 
 ## Deploy
 

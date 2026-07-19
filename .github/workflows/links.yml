@@ -1,0 +1,24 @@
+name: Links
+
+# Check that external links stay alive (NGIB, Wikidata, licences, GitHub).
+# The corpusbalear.org apex/subdomains are excluded until they are deployed.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  lychee:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check links
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: >-
+            --no-progress --max-retries 2 --timeout 20
+            --exclude 'corpusbalear\.org'
+            README.md web/index.html
+          fail: true
