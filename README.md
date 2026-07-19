@@ -1,5 +1,7 @@
 # Corpus Balear — portal
 
+[![Validate](https://github.com/acpicornell/corpusbalear/actions/workflows/validate.yml/badge.svg)](https://github.com/acpicornell/corpusbalear/actions/workflows/validate.yml)
+
 Landing hub for the **Corpus Balear**: a family of independent digital editions of
 public-domain historical sources about the Balearic Islands — the great censuses and
 gazetteers (1768–1881), early maps (Mut 1683, Despuig 1785) and present-day surname
