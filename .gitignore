@@ -1,0 +1,7 @@
+# macOS
+.DS_Store
+
+# Node / Wrangler (only if you later run npm/wrangler locally)
+node_modules/
+.wrangler/
+.dev.vars
