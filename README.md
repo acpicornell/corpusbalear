@@ -55,6 +55,13 @@ The interface is in Catalan, as a deliberate cultural choice for the material.
     `Permissions-Policy`).
 - `wrangler.jsonc` — Worker config (`name: corpusbalear-portal`, assets from `web/`).
 
+## Validation
+
+`scripts/validate.py` (standard library only) checks HTML sanity, JSON-LD validity,
+internal-anchor resolution, relative-asset existence, and that the project cards and the
+JSON-LD `hasPart` graph list the same URLs. Run it locally with `python3 scripts/validate.py`;
+GitHub Actions (`.github/workflows/validate.yml`) runs it on every push and pull request.
+
 ## Deploy
 
 ```sh
