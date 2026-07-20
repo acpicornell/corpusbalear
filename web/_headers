@@ -7,7 +7,7 @@
   Cache-Control: public, max-age=0, must-revalidate
 
 /*.css
-  Cache-Control: public, max-age=3600
+  Cache-Control: public, max-age=0, must-revalidate
 
 # Security headers. CSP: script-src 'self' (only the inline JSON-LD data block,
 # which is not executable script); style-src allows inline style="--yr:…" attrs;
