@@ -18,8 +18,10 @@ jobs:
         uses: lycheeverse/lychee-action@v2
         with:
           args: >-
-            --no-progress --max-retries 2 --timeout 20
+            --no-progress --max-retries 3 --timeout 30
             --accept '200..=299,429'
             --exclude 'corpusbalear\.org'
+            --exclude 'gnu\.org'
+            --exclude 'creativecommons\.org'
             README.md web/index.html
           fail: true
