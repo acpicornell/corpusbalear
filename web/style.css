@@ -205,6 +205,8 @@ footer .muted { color: var(--ink-faint); font-size: .84rem; line-height: 1.5; }
 .footer-bottom {
   text-align: center;
 }
+.footer-bottom .muted a { color: var(--accent); }
+.footer-bottom .muted a:hover { color: var(--ink); }
 .foot-links { margin: .5rem 0 0; }
 .foot-links a {
   display: inline-flex;
