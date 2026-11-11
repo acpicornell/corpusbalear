@@ -11,7 +11,8 @@ gazetteers (1768–1881), early maps (Mut 1683, Despuig 1785) and present-day su
 
 The portal lives at the apex domain **`corpusbalear.org`** and links out to each project,
 which is served from its own subdomain by its own Cloudflare Worker. It is a single static
-page — vanilla HTML + CSS, no build step, no JavaScript, no external requests.
+page — vanilla HTML + CSS, no build step, no external requests; one small same-origin
+script (`theme.js`) provides the light/dark toggle.
 
 ## Projects linked
 
@@ -34,7 +35,8 @@ The interface is in Catalan, as a deliberate cultural choice for the material.
 ## Content
 
 - **Featured** — the aggregator, presented as the diachronic entry point.
-- **Grouped cards** — *Censos i nomenclàtors*, *Mapes*, *Llinatges*.
+- **Grouped cards** — *Censos i nomenclàtors*, *Mapes*, *Cròniques*
+  (Cronicón Mayoricense), *Llinatges*.
 - **Sobre el corpus** — what it is and the value of reading the sources in parallel.
 - **Fonts, mètode i llicència** — the pipeline (facsimile → transcription → structured
   data → NGIB/Wikidata anchoring) and the licensing model.
@@ -55,9 +57,14 @@ The interface is in Catalan, as a deliberate cultural choice for the material.
   - `style.css` — shares the academic palette of the sibling sites (system serif,
     warm paper, brown accent, per-year colours). Full-bleed layout with
     viewport-relative margins. WCAG AA contrast; visible `:focus-visible` ring.
+  - `theme.js` — light/dark theme toggle, shared with the sibling sites.
   - `robots.txt`, `sitemap.xml` — SEO.
+  - `sitemap-index.xml` — sitemap index pointing at the portal's and every project's
+    sitemap.
   - `_headers` — cache + security headers (CSP, `nosniff`, `Referrer-Policy`,
     `Permissions-Policy`).
+- `scripts/validate.py` — HTML/JSON-LD/link sanity checks (see below).
+- `scripts/check_site.py` — lints the site against the CSP its own `_headers` ships.
 - `wrangler.jsonc` — Worker config (`name: corpusbalear-portal`, assets from `web/`).
 
 ## Continuous integration

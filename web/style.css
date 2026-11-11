@@ -232,31 +232,6 @@ footer {
   padding: 1.2rem 0 1rem;
   margin-top: 2.5rem;
 }
-.footer-grid {
-  display: block;
-  margin: 0 auto;
-  text-align: center;
-}
-.footer-about { margin-bottom: 1.6rem; }
-.footer-brand { margin: 0 0 .5rem; font-size: 1.15rem; font-weight: 600; color: var(--ink); }
-.footer-col h3 {
-  margin: 0 0 .7rem;
-  font-size: .78rem;
-  text-transform: uppercase;
-  letter-spacing: .08em;
-  color: var(--ink-faint);
-  font-weight: 600;
-}
-.footer-col a {
-  display: block;
-  font-size: .9rem;
-  color: var(--ink-dim);
-  text-decoration: none;
-  border: none;
-  padding: .18rem 0;
-}
-.footer-col a:hover { color: var(--accent); }
-.footer-col p { margin: 0 0 .6rem; }
 footer .muted { color: var(--ink-dim); font-size: .84rem; line-height: 1.5; }
 .footer-bottom {
   text-align: center;
