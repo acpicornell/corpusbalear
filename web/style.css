@@ -9,7 +9,62 @@
   --rule: #d7dde2;
   --accent: #6b4423;
   --accent-soft: #e9d8c4;
+  --shadow: rgba(31,41,51,.1);
 }
+
+/* Dark theme. Defined twice: once for "the system is dark and the reader has
+   not chosen light", once for "the reader chose dark" (theme.js sets
+   data-theme on <html> before the first paint). */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ink: #e7eaed;
+    --ink-dim: #adb6bf;
+    --ink-faint: #828d98;
+    --paper: #15181b;
+    --paper-card: #1d2125;
+    --rule: #2e353b;
+    --accent: #d6a77a;
+    --accent-soft: #4d3a27;
+    --shadow: rgba(0,0,0,.45);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --ink: #e7eaed;
+  --ink-dim: #adb6bf;
+  --ink-faint: #828d98;
+  --paper: #15181b;
+  --paper-card: #1d2125;
+  --rule: #2e353b;
+  --accent: #d6a77a;
+  --accent-soft: #4d3a27;
+  --shadow: rgba(0,0,0,.45);
+  color-scheme: dark;
+}
+:root[data-theme="light"] { color-scheme: light; }
+
+/* Each card's colour (--yr, set on the card) is a dark tone chosen for paper;
+   on a dark page it is lifted towards white so the year stays legible. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .card { --yr-on: color-mix(in srgb, var(--yr, var(--accent)) 55%, #fff); }
+}
+:root[data-theme="dark"] .card { --yr-on: color-mix(in srgb, var(--yr, var(--accent)) 55%, #fff); }
+
+/* Light/dark toggle (theme.js). */
+.theme {
+  float: right;
+  margin-left: 12px;
+  display: grid;
+  place-items: center;
+  background: none;
+  cursor: pointer;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  padding: 6px;
+  color: var(--ink-dim);
+}
+.theme:hover { color: var(--accent); border-color: var(--accent); }
+.theme:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
@@ -106,6 +161,7 @@ header h1 {
   text-decoration: none;
   transition: transform .12s ease, box-shadow .12s ease;
   box-shadow: 0 1px 2px rgba(0,0,0,.12);
+  outline: 1px solid transparent;
 }
 .featured:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(36,48,63,.32); }
 .featured-tag {
@@ -147,7 +203,7 @@ section { margin-bottom: 2.8rem; }
   position: relative;
   background: var(--paper-card);
   border: 1px solid var(--rule);
-  border-left: 4px solid var(--yr, var(--accent));
+  border-left: 4px solid var(--yr-on, var(--yr, var(--accent)));
   border-radius: 8px;
   padding: 1.1rem 1.2rem 1.2rem;
   text-decoration: none;
@@ -156,14 +212,14 @@ section { margin-bottom: 2.8rem; }
 }
 .card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(31,41,51,.1);
+  box-shadow: 0 6px 18px var(--shadow);
 }
 .card .year {
   display: block;
   font-size: .8rem;
   font-weight: 600;
   letter-spacing: .04em;
-  color: var(--yr, var(--accent));
+  color: var(--yr-on, var(--yr, var(--accent)));
   margin-bottom: .3rem;
 }
 .card h3 { margin: 0 0 .4rem; font-size: 1.2rem; font-weight: 600; }
@@ -225,3 +281,10 @@ footer .muted { color: var(--ink-dim); font-size: .84rem; line-height: 1.5; }
   .featured { padding: 1.4rem 1.3rem; }
   .featured h2 { font-size: 1.4rem; }
 }
+
+/* The featured block is already dark; on a dark page a hairline keeps it from
+   dissolving into the background. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .featured { outline-color: var(--rule); }
+}
+:root[data-theme="dark"] .featured { outline-color: var(--rule); }

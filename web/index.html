@@ -4,7 +4,8 @@
 <meta charset="utf-8">
 <title>Corpus Balear · Edicions digitals de fonts històriques de les Illes Balears</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#fafaf6">
+<meta name="theme-color" content="#fafaf6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#15181b" media="(prefers-color-scheme: dark)">
 <meta name="description" content="Corpus d'edicions digitals de fonts històriques de les Illes Balears: censos i nomenclàtors (1768–1881), mapes antics (Mut 1683, Despuig 1785) i l'estudi dels llinatges. Fonts de domini públic, transcrites, estructurades i ancorades al Nomenclàtor Geogràfic de les Illes Balears i a Wikidata.">
 <link rel="canonical" href="https://corpusbalear.org/">
 <meta property="og:type" content="website">
@@ -16,6 +17,7 @@
 <meta name="twitter:card" content="summary">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🧭%3C/text%3E%3C/svg%3E">
 <link rel="stylesheet" href="style.css">
+<script src="theme.js"></script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -57,6 +59,7 @@
 
 <header>
   <div class="wrap">
+    <button class="theme" type="button" id="theme" aria-label="Canvia entre tema clar i fosc" title="Tema clar / fosc"><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><circle cx="10" cy="10" r="7.2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 2.800a7.200 7.200 0 0 1 0 14.400z" fill="currentColor"/></svg></button>
     <h1>Corpus Balear</h1>
     <p class="subtitle">Edicions digitals de fonts històriques de les Illes Balears</p>
     <nav class="topnav">
