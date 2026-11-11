@@ -9,7 +9,7 @@ public-domain historical sources about the Balearic Islands — the great census
 gazetteers (1768–1881), early maps (Mut 1683, Despuig 1785) and present-day surname
 (isonymy) studies.
 
-The portal lives at the apex domain **`corpusbalear.org`** and links out to each project,
+The portal lives at the apex domain **<https://corpusbalear.org>** and links out to each project,
 which is served from its own subdomain by its own Cloudflare Worker. It is a single static
 page — vanilla HTML + CSS, no build step, no external requests; one small same-origin
 script (`theme.js`) provides the light/dark toggle.
@@ -49,50 +49,14 @@ The interface is in Catalan, as a deliberate cultural choice for the material.
   under copyleft (e.g. AGPL-3.0), **curated data** under Creative Commons BY-NC. Each
   project states its exact terms. The `mapa-mut` project is the reference for this model.
 
-## Structure
-
-- `web/` — static assets served by Cloudflare Workers Static Assets:
-  - `index.html` — the hub page. Semantic HTML, `lang="ca"`, JSON-LD
-    (`CollectionPage` + `Organization`), Open Graph, canonical.
-  - `style.css` — shares the academic palette of the sibling sites (system serif,
-    warm paper, brown accent, per-year colours). Full-bleed layout with
-    viewport-relative margins. WCAG AA contrast; visible `:focus-visible` ring.
-  - `theme.js` — light/dark theme toggle, shared with the sibling sites.
-  - `robots.txt`, `sitemap.xml` — SEO.
-  - `sitemap-index.xml` — sitemap index pointing at the portal's and every project's
-    sitemap.
-  - `_headers` — cache + security headers (CSP, `nosniff`, `Referrer-Policy`,
-    `Permissions-Policy`).
-- `scripts/validate.py` — HTML/JSON-LD/link sanity checks (see below).
-- `scripts/check_site.py` — lints the site against the CSP its own `_headers` ships.
-- `wrangler.jsonc` — Worker config (`name: corpusbalear-portal`, assets from `web/`).
-
-## Continuous integration
-
-GitHub Actions run on every push and pull request (`.github/workflows/`):
-
-- **validate** — `scripts/validate.py` (standard library only): HTML sanity, JSON-LD
-  validity, internal-anchor resolution, relative-asset existence, and that the project
-  cards and the JSON-LD `hasPart` graph list the same URLs. Run locally with
-  `python3 scripts/validate.py`.
-- **a11y** — serves the site and runs [pa11y](https://pa11y.org/) at WCAG 2.1 AA.
-- **links** — [lychee](https://lychee.cli.rs/) checks external links stay alive (the
-  `corpusbalear.org` hosts are excluded until deployed).
-- **deploy** — `wrangler deploy` on push to main. Inert until a `CLOUDFLARE_API_TOKEN`
-  repository secret is set (the guard step skips it so the run stays green meanwhile).
-
-## Deploy
+## Run / deploy
 
 ```sh
-npx wrangler deploy
+python3 scripts/validate.py   # HTML, JSON-LD and link sanity checks
+npx wrangler deploy           # web/ is served as static assets; no build step
 ```
 
-Then attach the custom domains `corpusbalear.org` and `www.corpusbalear.org` to this Worker
-(Cloudflare dashboard → Workers → this worker → Custom Domains). TLS is provisioned and
-renewed automatically; enable **Always Use HTTPS** on the zone.
+## Documentation
 
-## Adding a project
-
-Add an `<a class="card" href="https://<slug>.corpusbalear.org/">` entry to the right
-section in `index.html`, plus a matching `hasPart` entry in the JSON-LD block. When the
-Menorca and Eivissa isonymy studies are ready, they join the *Llinatges* section.
+- [docs/MAINTENANCE.md](docs/MAINTENANCE.md) — repository structure, continuous
+  integration, deployment and custom domains, and how to add a project.

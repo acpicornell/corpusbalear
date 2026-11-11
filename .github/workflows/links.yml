@@ -23,5 +23,5 @@ jobs:
             --exclude 'corpusbalear\.org'
             --exclude 'gnu\.org'
             --exclude 'creativecommons\.org'
-            README.md web/index.html
+            README.md docs/*.md web/index.html
           fail: true
