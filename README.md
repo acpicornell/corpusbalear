@@ -26,6 +26,7 @@ page — vanilla HTML + CSS, no build step, no JavaScript, no external requests.
 | Diccionari de Riera · 1881 | `riera.corpusbalear.org` |
 | Mapa de Vicenç Mut · 1683 | `mut.corpusbalear.org` |
 | Mapa del cardenal Despuig · 1785 | `despuig.corpusbalear.org` |
+| Cronicón Mayoricense · 1881 | `cronicon.corpusbalear.org` |
 | Isonímia mallorquina actual (INE 2025) | `llinatges.corpusbalear.org` |
 
 The interface is in Catalan, as a deliberate cultural choice for the material.
